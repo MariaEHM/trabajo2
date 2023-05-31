@@ -1,0 +1,1660 @@
+---
+title: "sesiones"
+author: "María Elvira Hernández  Montoya"
+date: "2023-05-30"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+```{r}
+#---------------------
+#setwd("C/CursoEyP")
+#------------------------sesion 1
+x<- c(1,12,30,54,5);
+print(x)
+y<- runif(10,0,100)
+print(y)
+y<- floor(y);print(y)
+#defino una constante aleatoria k
+k<- floor(runif(1,0,100)); print(k)
+z<- k+y; print(z)
+x1 <-floor(runif(15,0,50))
+x2<- ceiling(runif(15,0,50))
+
+y1<- x1+x2;print(y1)
+y2<- x1-x2;print(y2)
+y3<- x1%*%x2;print(y3)
+```
+
+
+```{r}
+#k*y1,y1/k,
+
+w<- floor(runif(1500,0,150))
+print(w)
+head(w,30)
+tail(w,30)
+
+A<- matrix(0,5,5);print(A)
+
+
+```
+
+
+```{r}
+
+n<-5;m<- 5
+B<-matrix(0,n,n);print(B)
+for(i in 1:n){
+  for (j in 1:m) {
+    B[i,j]<- ceiling(runif(1,0,15))  
+  }
+}
+print(B)
+View(B)
+colnames(B)<- c('Lunes','Martes',
+                'Miercoles','Jueves','Viernes')
+rownames(B) <- c('Enero','Febrero',
+                 'Marzo','Abril',
+                 'Mayo')
+View(B)
+B
+B[,3]
+B[3.]
+B[1:3,]
+B[,1:3]
+indices <-c(2,4)
+B[indices,]
+B[,indices]
+#-------------------------------------------------------------------------------------------------------
+```
+
+# Sesion 2
+
+```{r}
+#setwd("C://Temporal")
+
+n <- 5
+m <- 5
+
+B <- matrix(0,n,m); print(B)
+for(i in 1:n){
+  for(j in 1:m){
+    B[i,j] <- floor(runif(1,-15,15));
+    print(B[i,j])
+  }
+}
+colnames(B) <- c('Lunes','Martes','Miercoles',
+                 'jueves','Viernes')
+rownames(B) <- c('Enero','Febrero','Marzo',
+                 'Abril','Mayo')
+View(B)
+```
+
+
+```{r}
+# -------------------------------------------------
+n <- 7
+m <- 7
+
+B <- matrix(0,n,m); print(B)
+for(i in 1:n){
+  for(j in 1:m){
+    B[i,j] <- floor(runif(1,0,15));
+    print(B[i,j])
+  }
+}
+colnames(B) <- c('Lunes','Martes','Miercoles',
+                 'jueves','Viernes','Sabado',
+                 'Domingo')
+rownames(B) <- c('Enero','Febrero','Marzo',
+                 'Abril','Mayo','Junio',
+                 'Julio')
+View(B)
+```
+
+
+```{r}
+indRenglonPar   <- c(2,4,6)
+indRenglonImpar <- c(1,3,5,7)
+indColPar       <- c(2,4,6)
+indColImpar     <- c(1,3,5,7)
+
+M1 <- B[1:3,1:4]; print(M1)
+M2 <- B[4:7,4:7]; print(M2)
+M3 <- B[,indColImpar]; print(M3)
+M4 <- B[indRenglonPar,]; print(M4)
+M5 <- B[indRenglonImpar,indColImpar]; print(M5)
+M6 <- B[indRenglonPar,indColPar]; print(M6)
+M7 <- B[indRenglonPar,indColImpar]; print(M7)
+M8 <- B[indRenglonImpar,indColPar]; print(M8)
+
+n <- 7; m <- 7
+A1 <- matrix(0,n,m); print(A1)
+A2 <- matrix(0,n,m); print(A2)
+A3 <- matrix(0,n,m); print(A3)
+A4 <- matrix(0,n,m); print(A4)
+for(i in 1:n){
+  for(j in 1:m){
+    entrada <- runif(1,-50,50)
+    A1[i,j] <- floor(entrada)
+    A2[i,j] <- ceiling(entrada)
+    A3[i,j] <- trunc(entrada)
+    A4[i,j] <- round(entrada)
+  }
+}
+print(A1)
+print(A2)
+print(A3)
+print(A4)
+
+A4-A1
+A4-A2
+A4-A3
+```
+
+
+```{r}
+
+D <-  matrix(0,n,m)
+L <-  matrix(0,n,m)
+U <-  matrix(0,n,m)
+for(i in 1:n){
+  for(j in 1:m){
+    if(i==j){D[i,j]<- ceiling(runif(1,-50,50))}
+    if(j<=i){L[i,j]<- ceiling(runif(1,-50,50))}
+    if(j>=i){U[i,j]<- ceiling(runif(1,-50,50))}
+  }
+}
+print(D)
+print(L)
+print(U)
+L <-  matrix(0,n,m)
+for(i in 1:n){
+  for(j in 1:i){
+    L[i,j]<- ceiling(runif(1,-50,50))
+  }
+}
+print(L)
+
+for(i in 1:n){
+  for(j in i:m){
+    U[i,j]<- ceiling(runif(1,-50,50))
+  }
+}
+print(U)
+```
+
+
+```{r}
+# -------------------------------------------------
+n <- 15
+x <- matrix(0,1,n)
+for(i in 1:n){
+  x[i] <- round(runif(1,0,100))
+}
+head(x)
+
+suma   <- 0
+xbarra <- 0
+for(i in 1:n){
+  suma <- suma + x[i]
+}
+xbarra <- suma/n; print(xbarra)
+```
+
+
+```{r}
+suma2    <- 0
+varianza <- 0
+for(i in 1:n){
+  termino <- x[i]-xbarra
+  termino2 <- termino^2
+  suma2 <- suma2 + termino2
+}
+varianza <- suma2/(n-1); print(varianza)
+```
+
+
+```{r}
+
+# SE SIMULA UNA BASE DE DATOS CON 150 REALIZACIONES EN CADA MUESTRA, Y 30 MUESTRAS.
+
+NumVar     <- 150   # numero de datos a generar
+NumMuestra <- 30    # NUMERO DE MUESTRAS A CONSIDERAR
+Datos <- matrix(0,NumVar,NumMuestra); head(Datos)
+# A CONTINUACION SE SIMULA LA BASE DE DATOS
+for(i in 1:NumMuestra){
+  Datos[,i] <- round(runif(NumVar, 30,50));
+}
+View(Datos)
+```
+
+
+```{r}
+
+# VAMOS A DETERMINAR LAS MEDIDAS DE TENDENCIA CENTRAL Y DE DISPERSION PARA CADA UNA DE LAS MUESTRAS
+# MEDIA PARA LA PRIMERA MUESTRA
+X1 <- Datos[,1]; head(X1)
+suma <- 0
+for(i in 1:NumVar){
+  suma <- suma + X1[i]
+}
+PromedioX1 <- suma/NumVar
+# AHORA VAMOS A CALCULAR LA MODA
+contando <- table(X1); print(contando)
+# ESTA INSTRUCCION CUENTA LAS VECES QUE SE REPITE CADA UNO DE LOS VALORES
+ordenado <- sort(contando);
+n <- length(ordenado); # CALCULAMOS EL NUMERO DE VARIABLES QUE SE TIENEN
+modaX1 <- ordenado[n]
+# PARA DETERMINAR LA MEDIANA RECORDEMOS QUE ES EL VALOR QUE SE ENCUENTRA UBICADO EXACTAMENTE
+# EN LA MITAD, PARA ESO DETERMINAREMOS EL NUMERO DE DATOS Y DEPENDIENDO DE SI ES PAR O IMPAR SE 
+# DETERMINARA LA MEDIANA
+N <- length(X1)
+# DETERMINEMOS SI LA CANTIDAD ES PAR O IMPAR
+if( N%%2==0){
+  print('ES UN NUMERO PAR DE DATOS')
+  X1Ord <- sort(X1) # ESTA INSTRUCCION ORDENA DE MENOR A MAYOR.
+  primero <- X1Ord[N/2]   # OBTENEMOS EL DATO QUE ESTA AL FINAL DE LOS PRIMEROS n/2 DATOS
+  segundo <- X1Ord[N/2+1] # OBTENEMOS EL DATO QUE ESTA AL INICIO DE LOS SEGUNDOS n/2 DATOS
+  medianaX1 <- (primero+segundo)/2
+}else{
+  X1Ord <- sort(X1) # ESTA INSTRUCCION ORDENA DE MENOR A MAYOR.
+  medianaX1 <- X1Ord[N/2+1] # OBTENEMOS EL DATO QUE ESTA A LA MITAD DE LOS DATOS
+}
+
+MTC <- matrix(0,1,3)
+MTC[1,1] <- PromedioX1;
+MTC[1,2] <- medianaX1
+MTC[1,3] <- modaX1
+colnames(MTC) <- c('Media','Mediana','Moda'); print(MTC)
+#rownames(MTC) < c('Muestra1')
+```
+
+
+```{r}
+# CALCULEMOS AHORA LA PRINCIPAL MEDIDA DE DISPERSION
+
+suma <- 0;
+for(i in 1:NumVar){
+  termino1 <- X1[i]-PromedioX1
+  termino12 <- termino1^2
+  suma <- suma + termino12
+}
+Varianza <- suma/(NumVar-1)
+DesvEst <- sqrt(Varianza)
+print(DesvEst)
+
+```
+
+# Sesion 4
+
+```{r}
+          
+  #MODELO DE REGRESION LINEAL
+
+  #EL MODELO DE REGRESION LINEAL SIMPLE ES:YGORRO=BETA_{0}GORRO+BETA_{1}GORRO*X
+  #DONDE BETA_{1}=S_{XY}/S_{XX}
+  #BETA_{0}=Y_BARRA -BETA_{1}*X_BARRA
+  #S_{XX}=[suma_{i=1}^{n}(x_{i}-X_BARRA)^2]/n
+  #S_{XY}=[suma_{i=1}^{n}(x_{i}-X_BARRA)*(y_{i}-Y_BARRA)]/n
+
+```
+
+
+```{r}
+#setwd("-/Documentos/CursoProba")
+#SE SIMULA UNA BASE DE DATROS CON 150 REALIZACIONES EN CADA MUESTRA, Y 30S MUESTRA.
+NumVar <- 150 #numero de datos a generar
+NumMuestra<- 30 #NUMER0 DE MUESTRAS A CONSIDERAR
+Datos <- matrix(0,NumVar,NumMuestra);head(Datos)
+for (i in 1:NumMuestra){Datos[,i]<- round(runif(NumVar,30,50));}
+View(Datos)
+```
+
+
+```{r}
+
+x1<-abs(round(rnorm(NumVar,0,50)));print(x1)
+Datos<- cbind(x1,Datos);View(Datos)
+```
+
+
+```{r}
+
+#consideremos las primeras dos muestras
+X<-Datos[,2]; Y <-Datos[,3]
+#Calculemos la media de cada variable 
+suma <- 0; for(i in 1:NumVar){suma<- suma+ X[i]};xbarra<- suma/NumVar;
+print(xbarra)
+suma<- 0; for( i in 1:NumVar){suma<- suma+Y[i]};ybarra<- suma/NumVar;
+print(ybarra)
+suma <-0; for( i in 2:NumVar){suma<- suma+(X[i]-xbarra)^2};Sxx<- suma/NumVar;
+print(Sxx)
+suma<-0;for(i in 1:NumVar){suma<-suma +(X[i]-xbarra)*(Y[i]-xbarra)};Sxy<-suma/NumVar;
+print(Sxy)
+Beta1<- Sxy/Sxx;   print(Beta1);
+Beta0<- ybarra- Beta1*xbarra; print(Beta0)
+#para hacer las prediciones, se utiliza la ecuacion Ygorro=Ygorro= Beta0+Beatal*X
+Ygorro<- Beta0+Beta1*X;print(Ygorro)
+Error <- Y -Ygorro; print(Error)
+
+
+```
+
+
+```{r}
+
+  #COEFICIENTE DE CORRELACIÓN 
+
+
+  #SE DEFINE COMO COV(XY)/RAIZ(VAR(X)*VAR(Y))
+
+
+  #METODO 1
+  #
+  #Numrador<- SUMA[(x_{i}-x_barra)(y_{i}- y_barra)]
+  #Denominador <-raiz1*raiz2,donde
+  #raiz1<- suma(x_[i]-x_barra)^2
+  #raiz2 <- suma(y_{i}-y_barra)^2
+  #IMPLEMENTACION REVISAR- TIENE ERROR
+
+suma1<- 0;suma2 <-0;
+for(i in 1:NumVar){suma1<-suma1+X[i];suma2+Y[i];
+}
+xbarra <-suma1/NumVar; ybarra <-suma2/NumVar;print(xbarra);print(ybarra)
+suma<-0;for(i in 1:NumVar){suma<-suma+(X[i]-xbarra)^2}; nSxy<- suma;
+print(nSxy)
+suma <-0;for(i in 1:NumVar){suma<- suma+(X[i]-xbarra)^2};nSxx<- suma;rnSxx<-
+  sqrt(nSxx);print(rnSxx)
+suma <-0;for(i in 1:NumVar){suma<- suma+(X[i]-xbarra)^2};nSyy<- suma;rnSyy<-
+  sqrt(nSyy);print(rnSyy)
+rxy<- nSxx/(rnSxx*rnSyy);print(rxy)
+
+
+```
+
+
+```{r}
+  #METODO2
+  #Numerador<-Termino1+Termino2
+  #Denominador <- raiz1*raiz2,DONDE
+  #Termino1 <- n*suma(x_{i}*y_{i})
+  #Termino2<-suma(x_{i})*suma(y_{i})
+  #raiz<-raiz(n*suma(x_{i}^2-(suma(x_{i})^2)))
+  #raiz2<-raiz(n*suma(y_{i}^2-(suma(y_{i})^2)))
+  #IMPLEMENTACIÓN 
+
+
+suma<-0;for(i in 1:NumVar){suma<-suma+X[i]*Y[i]};Ter1<- NumVar*suma;print(Ter1)
+suma<-0;suma2<-0;for(i in 1:NumVar){suma1<-suma1+X[i];suma2<-suma2+Y[i]};Ter2<-suma1*suma2;
+print(Ter2)
+Numerador<-Ter1-Ter2;print(Numerador);
+suma<-0;for(i in 1:NumVar){suma<-suma+(X[i]^2)};Ter<-NumVar*suma-
+  (NumVar*xbarra)^2; raiz1<-sqrt(Ter1);
+suma<-0;for(i in 1:NumVar){suma<-suma+(Y[i]^2)};Ter<-NumVar*suma-
+  (NumVar*ybarra)^2; raiz2<-sqrt(Ter2);
+Denominador <-raiz1*raiz2;print(Denominador);
+Rxy<-Numerador/Denominador;print(Rxy)
+```
+
+
+```{r}
+
+
+
+#
+#Cov(X,Y)<-(1/2n^2)suma suma(x_{i}-x_barra)(y_{i}-y_barra)
+#IMPLEMENTACION
+#
+```
+
+# Sesion 5: Regresion Lineal
+
+```{r}
+  #REGRESION LINEAL
+      # SESION 5 
+
+numvar <- 100; media <-0; varianza <-1; a<-5
+#Generar datos aleatorios de una distribucion normal
+                      datos <-rnorm(numvar, mean = media, sd =varianza)
+                      #Calcular la densidad de la distribución normal en un rango de valores 
+                      rango <- seq(-a, a, length.out=100)
+                      densidad <-dnorm(rango, mean= media, sd= varianza)
+                      #Dibujar la grafica de la distribucion normal 
+                      plot(rango, densidad, type= "l",lwd=2,
+                           xlab="Valores",ylab ="Densidad",
+                           main= "Distribución normal estándar")
+                      #Agregar los datos aleatorios a la grafica
+                      hist(datos, breaks =30, add=TRUE, col ="yellow",
+                           border='green', freq=FALSE)
+                      # <<====>> <<========>> <<====>> <<=====>>> <<<====>>> <<<=====>>> <<=====>>>
+                      #<<=======>
+```
+
+
+```{r}
+                        #Distribucion Exponencial 
+                        #<<=====>> <<======>>> <<===>>> <<==========>>> <<<========>>> <<<=====>>>
+                        # <<====>> <<========>> <<====>> <<=====>>> <<<====>>> <<<=====>>> <<=====>>>
+                       # <<=======>
+                        lambda <- 0.6; ValMax <-10;
+                      rango <- seq (0, ValMax, length.out =100)
+                      datos<- rexp (numvar, lambda);
+                      densidad<- dexp(rango,rate= lambda);
+                      #Dibujar la gráfica  de la distribución  exponencial 
+                      plot(rango, densidad,type ="l",lwd=2,
+                           xlab="Valores",ylab = "Densidad",
+                           main="Distribución exponencial")
+                      #Agregar los datos aleatorios a la grafica
+                      hist(datos, breaks = 30, col="yellow",border="green",
+                           add=TRUE, freq = FALSE)
+                      # <<====>> <<========>> <<====>> <<=====>>> <<<====>>> <<<=====>>> <<=====>>>
+                      #<<=======>
+```
+
+
+```{r}
+                        #Distribucion Gamma 
+                        #<<=====>> <<======>>> <<===>>> <<==========>>> <<<========>>> <<<=====>>>
+                        # <<====>> <<========>> <<====>> <<=====>>> <<<====>>> <<<=====>>> <<=====>>>
+                        #<<=======>
+                        a<- 2; b<-0.5
+                      #Genera datos aleatorios de una distribución  gamma
+                      datos<-rgamma(numvar,shape = a, rate = b)
+                      #Calcular la densidad de la distribución  gamma en un rango  de valores
+                      rango<- seq(0,ValMax, length.out=100)
+                      densidad <- dgamma(rango,shape = a, rate = b)
+                      #Dibujar la  grafica de la distribucion gamma
+                      plot(rango, densidad, type="l",lwd=2,
+                           xlab = "Valores",ylab = "Densidad",
+                           main = "Distribución gamma")
+                      #Agrerar los datos aleatorios a la gráfica 
+                      hist(datos,breaks = 30,col = "yellow", border = "green",
+                           add=TRUE,freq=FALSE)
+                      # <<====>> <<========>> <<====>> <<=====>>> <<<====>>> <<<=====>>> <<=====>>>
+                      #<=======>
+                        
+                        
+```
+
+
+```{r}
+                        
+                          #Distribucion Beta
+                        c<- 5
+                      datos <-rbeta(numvar,shape1 = a, shape2 = c)
+                      #Calcular la densidad de la distribución  beta en un rango de valores
+                      rango<-seq(0,1,length.out=100)
+                      densidad <-dbeta(rango,shape1 = a,shape2 = c)
+                      #Dibujar la gráfica  de la distribucion beta
+                      plot(rango,densidad, type="l",lwd=2,
+                           xlab = "Valores",ylab = "Densidad",
+                           main = "Distribución beta")
+                      #Agrerar los datos aleatorios a la gráfica 
+                      hist(datos,breaks = 30,col = "yellow", border = "green",
+                           add=TRUE,freq=FALSE)
+```
+
+
+```{r}
+                        #Distribucion Cauchy
+
+                    numvar<-150; a=0; b=1; ValMax<-10
+                    #Generar datos aleatorios de una distribución  de cauchy
+                    datos <-rcauchy(numvar, location = a, scale=b)
+                    #Calcular la densidad de la distribucion de Cauchy en un rango de valoresv
+                    rango<-seq(-ValMax,ValMax,length.out=100)
+                    densidad<-dcauchy(rango,location = a,scale = b)
+                    #Dibujar la grafica de la distribución  de Cauchy
+                    plot(rango,densidad, type="l",lwd=2,
+                         xlab = "Valores",ylab = "Densidad",
+                         main = "Distribución cauchy")
+                    #Agrerar los datos aleatorios a la gráfica 
+                    hist(datos,breaks = 30,col = "yellow", border = "green",
+                         add=TRUE,freq=FALSE)
+```
+
+
+```{r}
+             #Distribucion T-Student
+                      
+                    #Genera datos aleatorios de una distribucion t de student
+                    gl <-5; datos  <- rt(numvar, df=gl); ValMax <-5
+                    #Clacular la densidad de la distribucion t de student en un rango de valores
+                    rango<- seq(-ValMax,ValMax, length.out=100)
+                    densidad <-dt(rango, df =gl)
+                    #Dibujar la gráfica  dde la distribucion t de student
+                    plot(rango,densidad, type="l",lwd=2,
+                         xlab = "Valores",ylab = "Densidad",
+                         main = "Distribución t de Student")
+                    #Agrerar los datos aleatorios a la gráfica 
+                    hist(datos,breaks = 30,col = "yellow", border = "green",
+                         add=TRUE,freq=FALSE)
+                    
+```
+
+
+```{r}
+                      #Distribucion Chi-Cuadrada
+                      
+                    
+                    gl <-5; numvar <- 150; ValMax <-20
+                    #Genera datos aleatorios de una distribucion chi-cuadrada
+                    datos<-rchisq(numvar,df =gl)
+                    #Calcular la densidad de la distribucion chi-cuadrada en un rango de valores
+                    rango <- dchisq(rango,df=gl)
+                    #Dibujar la grafica  de la distribucion chi-cuadrada
+                    plot(rango,densidad, type="l",lwd=2,
+                         xlab = "Valores",ylab = "Densidad",
+                         main = "Distribución chi-cuadrada")
+                    #Agrerar los datos aleatorios a la gráfica 
+                    hist(datos,breaks = 30,col = "yellow", border = "green",
+                         add=TRUE,freq=FALSE)
+                    #Generar la funcion de densidad de probabilidad 
+                      #pdf_unif <-funcio(x){if  (x >= 0 & x <=1, 1,0)}
+                    #Genera datos de la variable aleatoria uniforme continua
+```
+
+
+```{r}
+set.seed(123) #establecer una semilla para la reproducibilidad
+pdf_unif <-function(x){ifelse(x >= 0 & x <=1, 1,0)}
+
+datos<- runif(1000, min =0,max = 1 )
+#Graficar la funcion de densidad de probabilidad  y de histograma
+par(mfrow =c(1,2))  #mostrar dos graficos en una fila 
+curve(pdf_unif, from = -0,5, to=1.5, n= 1000, col ="blue",
+      main ="Variable Aleatoria Uniforme Continua",
+      xlab = "Valor de la variable aleatoria", ylab = "Densidad de probabilidad")
+hist(datos,breaks = 20, col = "lightblue", freq = FALSE, add=TRUE)
+```
+
+
+```{r}
+
+                    
+
+                      #Todas en una sola ventana 
+                      par(mfow = c(2,3))
+                      #Calcular la distribución binomial
+                      n<- 10; p<- 0.5;  x<- 0:n #valores posibles de exitos
+                      prob <- dbinom(x,size=n, prob = p) #´probabilidad de cada valor de x
+                      #Graficar la distribucion binomial
+                      barplot(prob,names.arg=x, col="lightblue",
+                              main ="Distribucion Binomial",xlab ="Numero de éxitos ",
+                              ylab="Probabilidad")
+                      #Calcular la distribución  binomial y la distribución  teórica 
+                      n<- 20; p<- 0.3; x<- 0:n #valores posibles de exitos 
+                      prob <- dbinom(x,size=n,prob = p)#probabilidad de cada valor x
+                      mu <-n * p #media de la distribución  binomial
+                      
+                      sigma<- sqrt(n * p*(1 - p))# desviacion estándar  de la distribución binomial
+                      x_teorica <- seq(0,n, length.out= 100)#valores de x para la distribución 
+                      #teorica
+                      prob_teoria <- dnorm(x_teoria, mean = mu,sd = sigma)#probabilidad de cada valor 
+                      #de x_teoría 
+                      
+```
+
+
+```{r}                    
+                    
+                      
+                      #Según la  distribucion normal
+                      #Graficar la distribución binomial y la distribucion teórica 
+                      barplot(prob, names.arg= x, col= "lightblue",
+                              main="Distribucion Binomial vs. Distribucion Normal",
+                              xlab= "Numero de exitos", ylab ="Probabilidad")
+                      lines(x_teoria, prob_teoria,col="red",lwd=2)
+```
+
+
+```{r} 
+                 
+                     
+
+
+
+                      
+                      
+
+                      #distribución  geometrica
+                      #Graficar la distribución  geometrica y la distribución teórica 
+                      barplot(prob, names.arg= x, col="lightblue",
+                              main="Distribucion Geometrica vs. Distribucion Teórica",
+                              xlab= "Numero de ensayos antes del primer éxito", ylab="Probabilidad")
+                      points(x_teoria,prob_teoria,col="red",pch= 19)
+                      #Generar una muestra aleatoria  de una variable geométrica 
+                      set.seed(123)#fijar la semilla para reproducibilidad
+                      p<- 0.3; n<-1000; muestra <- rgeom(n, prob = p)
+                      #Calcular  la distribución teórica 
+                      x_teoria <- 0:10 #valores posibles  de la variable aleatoria
+                      prob_teoria<- dgeom(x_teoria,prob = p)#probabilidad de  de cada valor de x_teoría 
+                      #segun la
+                      #distribución  geometrica    
+                      #Graficar el histograma  y la distribución  teorica
+                      hist(muestra, prob=TRUE, col="lightblue",
+                           main ="Variables Aleatoria Geometrca vs. Distribucion Teorica",
+                           
+                           xlab="Valor de la variable aleatoria", ylab= "Densidad")
+                      lines(x_teoria,prob_teoria ,col= "red")
+                      #Calcular la distribución  teorica Poisson
+                      lambda <- 2 #parametro lambda de la variable aleatoria 
+                      x_teoria <- 0:10 #valores posibles de la variable aleatoria 
+                      prob_teoria <- dpois(x_teoria, lambda)# probabilidad de cada valor de x_teoria
+                      #segun la 
+                      
+                      
+                   
+```
+
+
+```{r}                     
+                      #Distribución  Poisson 
+                      #Graficar el diagrama de barra y la distribucion teorica
+                      barplot(prob_teoria,names.arg=x_teoria, col="lightblue",
+                              main="Distribución Poisson vs. Distrinucion teorica",
+                              xlab="Valor de la variable aleatoria", ylab ="Probabilidad")
+                      lines(x_teoria, prob_teoria,col="red")
+                      #Definir los valores posibles de la variable aleatoria y sus probabilidades
+                      x<- 1:5#Valores posibles de la variable aleatoria
+                      prob <- rep(1/5,5)#probabilidad igual para cada valor 
+                      #Graficar el diagrama de barras
+                      barplot(prob, names.arg=x, col="lightblue",
+                              main="Variable Aleatoria Uniforme Discreta",
+                              xlab="Valor de la variable aleatoria", ylab="Probabilidad")
+                     
+                      
+                      
+                      
+```
+
+
+```{r}
+
+```
+
+# Sesion 6
+
+```{r}    
+
+
+
+
+
+setwd("C:/Users/Alumno/Desktop/Muestreo/ClaseProba")
+#----------------------------------------------
+NumVar <- 150
+NumMuestras <- 30
+Datos <- matrix(0,NumVar,NumMuestras); View(Datos)
+```
+
+
+```{r}
+#----------------------------------------------
+set.seed(550)
+
+#----------------------------------------------
+for(i in 1:NumMuestras){
+  Datos[,i] <- round(runif(NumVar,30,50))
+}
+View(Datos)
+Ind <- abs(round(rnorm(150,24,10))); View(Ind)
+MiBDD <- cbind(Ind,Datos); View(MiBDD)
+#----------------------------------------------
+head(MiBDD,5)
+#----------------------------------------------
+X <- MiBDD[,1]; head(X,15)
+Y <- MiBDD[,2]; head(Y,15)
+
+#----------------------------------------------
+contando <- table(X); print(contando)
+#----------------------------------------------
+barplot(contando)
+
+barplot(contando,
+        col=rainbow(15,0.55))
+
+barplot(contando,
+        col=rainbow(15,0.55),
+        ylim = c(0,20))
+
+
+barplot(contando,
+        col=rainbow(15,0.55),
+        ylim = c(0,17))
+
+barplot(contando,
+        col=rainbow(15,0.55),
+        ylim = c(0,15),
+        xlab = 'Indices',
+        ylab = 'Frecuencias',
+        main = 'Mi Primer grafica')
+grid(1.5,10)
+
+barplot(contando,
+        col  = 'pink',#rainbow(15,0.55),
+        ylim = c(0,15),
+        xlim = c(-1,55),
+        xlab = 'Indices',
+        ylab = 'Frecuencias',
+        border="red",
+        main = 'Mi Primer grafica',
+        density = 15)
+grid(1.5,10)
+#----------------------------------------------
+```
+
+
+```{r}
+
+```
+
+# Sesion 8
+
+```{r}
+
+
+
+#---------------------------------------------- 8sesion
+set.seed(123)
+numvar <- 150;
+X <- rnorm(numvar);      print(X)
+Y <- 2*X +rnorm(numvar); print(Y)
+
+
+plot(X,Y)
+
+plot(X,Y,main= 'Ejemplo de Regresion Lineal',
+     xlab = 'Variable Independiente',
+     ylab = 'Variable Dependiente')
+
+plot(X,Y,main= 'Ejemplo de Regresion Lineal',
+     xlab = 'Variable Independiente',
+     ylab = 'Variable Dependiente',
+     col = 'blue')
+# >>==<< >>==<< >>==<< >>==<< >>==<< >>==<< >>==<<
+# >>==<< >>==<< >>==<< >>==<< >>==<< >>==<< >>==<<
+set.seed(123)
+numvar <- 150;
+# >>==<< >>==<< >>==<< >>==<< >>==<< >>==<< >>==<<
+# >>==<< >>==<< >>==<< >>==<< >>==<< >>==<< >>==<<
+X1 <- rnorm(numvar);      print(X1)
+Y1 <- X1+rnorm(numvar); print(Y1)
+Regresion <- MiRegresion(X1,Y1)
+plot(X1,Y1,main= 'Ejemplo 1 de Regresion Lineal',
+     xlab = 'Variable Independiente',
+     ylab = 'Variable Dependiente',
+     col = 'blue',
+     type = 'p')
+par(new=TRUE)
+plot(X1,Regresion$Yest,col='red',type='l')
+Ygorro <- Regresion$Yest
+hist(Ygorro, main='Distribucion de los Errores de estimacion',
+     xlab='Errores',
+     ylab= 'Frecuencia',
+     col = rainbow(15, 0.25),
+     border = 'green')
+
+
+# >>==<< >>==<< >>==<< >>==<< >>==<< >>==<< >>==<<
+X2 <- rnorm(numvar);      print(X2)
+Y2 <- 9*X2 +rnorm(numvar); print(Y2)
+Regresion <- MiRegresion(X2,Y2)
+plot(X2,Y2,main= 'Ejemplo 2 de Regresion Lineal',
+     xlab = 'Variable Independiente',
+     ylab = 'Variable Dependiente',
+     col = 'pink',
+     type = 'p')
+par(new=TRUE)
+plot(X2,Regresion$Yest,col='red',type='l')
+Ygorro <- Regresion$Yest
+hist(Ygorro, main='Ejmplo 2: Distribucion de los Errores de estimacion',
+     xlab='Errores',
+     ylab= 'Frecuencia',
+     col = rainbow(15, 0.25),
+     border = 'blue')
+# >>==<< >>==<< >>==<< >>==<< >>==<< >>==<< >>==<<
+X3 <- rnorm(numvar);      print(X3)
+Y3 <- -2*X3 +rnorm(numvar); print(Y3)
+Regresion <- MiRegresion(X3,Y3)
+plot(X3,Y3,main= 'Ejemplo 3 de Regresion Lineal',
+     xlab = 'Variable Independiente',
+     ylab = 'Variable Dependiente',
+     col = 'green',
+     type = 'p')
+par(new=TRUE)
+plot(X3,Regresion$Yest,col='red',type='l')
+Ygorro <- Regresion$Yest
+hist(Ygorro, main='Ejemplo 3: Distribucion de los Errores de estimacion',
+     xlab='Errores',
+     ylab= 'Frecuencia',
+     col = rainbow(15, 0.25),
+     border = 'pink')
+
+# >>==<< >>==<< >>==<< >>==<< >>==<< >>==<< >>==<<
+X4 <- rnorm(numvar);      print(X4)
+Y4 <- -2*X4 - rnorm(numvar); print(Y4)
+Regresion <- MiRegresion(X4,Y4)
+plot(X4,Y4,main= 'Ejemplo 4 de Regresion Lineal',
+     xlab = 'Variable Independiente',
+     ylab = 'Variable Dependiente',
+     col = 'orange',
+     type = 'p')
+par(new=TRUE)
+plot(X4,Regresion$Yest,col='red',type='l')
+Ygorro <- Regresion$Yest
+hist(Ygorro, main='Ejempolo 4: Distribucion de los Errores de estimacion',
+     xlab='Errores',
+     ylab= 'Frecuencia',
+     col = rainbow(15, 0.25),
+     border = 'brown')
+
+# >>==<< >>==<< >>==<< >>==<< >>==<< >>==<< >>==<<
+X5 <- rnorm(numvar);      print(X5)
+Y5 <- -2*X5 - 2*rnorm(numvar); print(Y5)
+Regresion <- MiRegresion(X5,Y5)
+plot(X5,Y5,main= 'Ejemplo 5 de Regresion Lineal',
+     xlab = 'Variable Independiente',
+     ylab = 'Variable Dependiente',
+     col = 'yellow',
+     type = 'p')
+par(new=TRUE)
+plot(X5,Regresion$Yest,col='red',type='l')
+Ygorro <- Regresion$Yest
+hist(Ygorro, main='Ejemplo 5: Distribucion de los Errores de estimacion',
+     xlab='Errores',
+     ylab= 'Frecuencia',
+     col = rainbow(15, 0.25),
+     border = 'red')
+
+
+suma <- 0;
+for(i in 1:numvar){suma <- suma +X[i]}
+xbarra <- suma/numvar;
+
+suma <- 0;
+for(i in 1:numvar){suma <- suma +Y[i]}
+ybarra <- suma/numvar;
+
+suma <- 0;
+for(i in 1:numvar){suma <- suma +(X[i]-xbarra)^2}
+Sxx <- suma/numvar
+
+suma <- 0;
+for(i in 1:numvar){suma <- suma+((X[i]-xbarra)*(Y[i]-ybarra))}
+Sxy <- suma/numvar;
+
+Beta1 <- Sxy/Sxx;
+Beta0 <- ybarra-Beta1*xbarra
+
+Ygorro <- Beta0+Beta1*X; print(Ygorro)
+ErrorEst <- Y-Ygorro
+hist(ErrorEst)
+
+source('C:/Users/Alumno/Desktop/ClaseProba/MiRegresion.R')
+x <- MiRegresion(X1,Y1)
+
+X1 <- rnorm(numvar);      print(X1)
+Y1 <- X1+rnorm(numvar); print(Y1)
+Regresion <- MiRegresion(X1,Y1)
+plot(X1,Y1,main= 'Ejemplo 1 de Regresion Lineal',
+     xlab = 'Variable Independiente',
+     ylab = 'Variable Dependiente',
+     col = 'blue',
+     type = 'p')
+par(new=TRUE)
+plot(X1,Regresion$Yest,col='red',type='l')
+Ygorro <- Regresion$Yest
+hist(Ygorro, main='Distribucion de los Errores de estimacion',
+     xlab='Errores',
+     ylab= 'Frecuencia',
+     col = rainbow(15, 0.25),
+     border = 'green')
+```
+
+```{r}
+#sesion9
+#1. X dist. normal con media = 2 y DesvEst = 1/3
+#a) P[X>3]
+#b) P[2<X<3]
+#c) Encontrar x0 tal que P[X>x0]= 0.45
+#d) Encontrar x* tal que P[X<x*]= alfa
+#alfa = 0.5;   alfa = 0.75;  alfa = 0.8;
+#alfa = 0.85;  alfa = 0.9;   alfa = 0.95
+#alfa = 0.99
+#e) P[X<0]
+#f) P[-1<X<1]
+
+#SOLUCIONES:
+
+#a) P[X>3]
+
+x0 <- 3
+mu <- 2;   desvest <- 1/3;
+z0 <- (x0-mu)/desvest; print(z0)
+probabilidad <- pnorm(z0,0,1);  print(probabilidad)
+probbuscada  <- 1-probabilidad; print(probbuscada)
+```
+
+```{r}
+#b) P[2<X<3]
+
+mu <- 2;   desvest <- 1/3;
+x1 <- 2;   
+z1 <- (x1-mu)/desvest; print(z1)
+p1 <- pnorm(z1,0,1);   print(p1)
+x2 <- 3;
+z2 <- (x2-mu)/desvest; print(z2)
+p2 <- pnorm(z2,0,1);   print(p2)
+probbuscada <- p2-p1;  print(probbuscada)
+```
+
+```{r}
+#e) P[X<0]
+
+x3 <- 0
+mu <- 2;   desvest <- 1/3;
+z3 <- (x3-mu)/desvest; print(z3)
+probabilidad <- pnorm(z3,0,1);  print(probabilidad)
+```
+
+```{r}
+#f) P[-1<X<1]
+
+
+mu <- 2;   desvest <- 1/3;
+x4 <- -1;   
+z4 <- (x4-mu)/desvest; print(z4)
+p4 <- pnorm(z4,0,1);   print(p4)
+x5 <- 1;
+z5 <- (x5-mu)/desvest; print(z5)
+p5 <- pnorm(z5,0,1);   print(p5)
+probbuscada <- p5-p4;  print(probbuscada)
+```
+
+```{r}
+#c) Encontrar x0 tal que P[X>x0]= 0.45
+# P[X>x*]= p*, entonces buscamos en tablas el valor x*, tal que 
+# P[X<x*] = q*= 1-p*, esto se hace con la funcion qnorm(q*,0,1)
+pestrella <- 0.45; qestrella = 1-pestrella; print(qestrella)
+zestrella <- qnorm(qestrella,0,1); print(zestrella)
+#corroboramos
+pnorm(zestrella,0,1) # s? es la respuesta correcta!!!!
+mu <- 2;   desvest <- 1/3;
+xestrella <- mu+desvest*zestrella; print(xestrella)
+# corroboramos
+pnorm(xestrella,2,1/3)
+```
+
+```{r}
+#d) Encontrar x* tal que P[X<x*]= alfa
+#i)   alfa = 0.5;   ii) alfa = 0.75;  iii) alfa = 0.8;
+#iv)  alfa = 0.85;   v) alfa = 0.9;    vi) alfa = 0.95
+#vii) alfa = 0.99
+
+alfa1 <- 0.5;
+t1 <- qnorm(alfa1,0,1); print(t1)
+mu <- 2;   desvest <- 1/3;
+x1 <- mu+desvest*z1; print(x1)
+
+
+
+ #Media = 100 y DesvEst = 16
+P[X<80]
+P[X>140]
+P[90<X<110]
+#Encontrar x1 y x2, tales que P[x1<X<x2]=alfa
+
+alfa = 0.5
+alfa = 0.75
+alfa = 0.8
+alfa = 0.85
+alfa = 0.9
+alfa = 0.95
+alfa = 0.99
+
+# sesion10
+#1. X dist. normal con media = 2 y DesvEst = 1/3
+#a) P[X>3]
+#b) P[2<X<3]
+#c) Encontrar x0 tal que P[X>x0]= 0.45
+#d) Encontrar x* tal que P[X<x*]= alfa
+#d') Encontrar x* talque P[|X|<x*]=alfa
+#alfa = 0.5;   alfa = 0.75;  alfa = 0.8;
+#alfa = 0.85;  alfa = 0.9;   alfa = 0.95
+#alfa = 0.99
+#e) P[X<0]
+#f) P[-1<X<1]
+
+#SOLUCIONES:
+
+#a) P[X>3]
+
+x0 <- 3
+mu <- 2;   desvest <- 1/3;
+z0 <- (x0-mu)/desvest; print(z0)
+probabilidad <- pnorm(z0,0,1);  print(probabilidad)
+probbuscada  <- 1-probabilidad; print(probbuscada)
+```
+
+```{r}
+#b) P[2<X<3]
+
+mu <- 2;   desvest <- 1/3;
+x1 <- 2;   
+z1 <- (x1-mu)/desvest; print(z1)
+p1 <- pnorm(z1,0,1);   print(p1)
+x2 <- 3;
+z2 <- (x2-mu)/desvest; print(z2)
+p2 <- pnorm(z2,0,1);   print(p2)
+probbuscada <- p2-p1;  print(probbuscada)
+```
+
+```{r}
+#e) P[X<0]
+
+x3 <- 0
+mu <- 2;   desvest <- 1/3;
+z3 <- (x3-mu)/desvest; print(z3)
+probabilidad <- pnorm(z3,0,1);  print(probabilidad)
+```
+
+```{r}
+#f) P[-1<X<1]
+
+mu <- 2;   desvest <- 1/3;
+x4 <- -1;   
+z4 <- (x4-mu)/desvest; print(z4)
+p4 <- pnorm(z4,0,1);   print(p4)
+x5 <- 1;
+z5 <- (x5-mu)/desvest; print(z5)
+p5 <- pnorm(z5,0,1);   print(p5)
+probbuscada <- p5-p4;  print(probbuscada)
+```
+
+```{r}
+#c) Encontrar x0 tal que P[X>x0]= 0.45
+# P[X>x*]= p*, entonces buscamos en tablas el valor x*, tal que 
+# P[X<x*] = q*= 1-p*, esto se hace con la funcion qnorm(q*,0,1)
+pestrella <- 0.45; qestrella = 1-pestrella; print(qestrella)
+zestrella <- qnorm(qestrella,0,1); print(zestrella)
+#corroboramos
+pnorm(zestrella,0,1) # s? es la respuesta correcta!!!!
+mu <- 2;   desvest <- 1/3;
+xestrella <- mu+desvest*zestrella; print(xestrella)
+# corroboramos
+pnorm(xestrella,2,1/3)
+```
+
+```{r} 
+#d) Encontrar x* tal que P[X<x*]= alfa
+#i)   alfa = 0.5;   ii) alfa = 0.75;  iii) alfa = 0.8;
+#iv)  alfa = 0.85;   v) alfa = 0.9;    vi) alfa = 0.95
+#vii) alfa = 0.99
+mu <- 2;   desvest <- 1/3;
+
+
+
+
+mu <- 2;   desvest <- 1/3;
+
+
+alfa1 <- 0.5;
+zest1 <- qnorm(alfa1,0,1); print(zest1)
+xest1 <- mu+desvest*zest1; print(xest1)
+
+
+alfa2 <- 0.75;
+zest2 <- qnorm(alfa2,0,1); print(zest2)
+xest2 <- mu+desvest*zest2; print(xest2)
+
+
+alfa3 <- 0.8;
+zest3 <- qnorm(alfa3,0,1); print(zest3)
+xest3 <- mu+desvest*zest3; print(xest3)
+
+
+alfa4 <- 0.85;
+zest4 <- qnorm(alfa4,0,1); print(zest4)
+xest4 <- mu+desvest*zest4; print(xest4)
+
+
+alfa5 <- 0.9;
+zest5 <- qnorm(alfa5,0,1); print(zest5)
+xest5 <- mu+desvest*zest5; print(xest5)
+
+alfa6 <- 0.95;
+zest6 <- qnorm(alfa6,0,1); print(zest6)
+xest6 <- mu+desvest*zest6; print(xest6)
+
+
+alfa7 <- 0.99;
+zest7 <- qnorm(alfa7,0,1); print(zest7)
+xest7 <- mu+desvest*zest7; print(xest7)
+
+
+Resultados <- matrix(0,7,3)
+Resultados[,1] <- c(alfa1, alfa2, alfa3, alfa4, alfa5, alfa6, alfa7)
+Resultados[,2] <- c(zest1,zest2,zest3,zest4,zest5,zest6,zest7); print(Resultados)
+Resultados[,3] <- c(xest1,xest2,xest3,xest4,xest5,xest6,xest7); print(Resultados)
+colnames(Resultados) <- c('Confianza','z*','x*'); print(Resultados)
+rownames(Resultados) <- c(1,2,3,4,5,6,7); print(Resultados)
+```
+
+```{r}
+mu <- 2;   desvest <- 1/3;
+
+alfa1 <- 0.75;
+zest1 <- qnorm(alfa1,0,1); print(zest1)
+xest1 <- mu+desvest*zest1; print(xest1)
+
+
+alfa2 <- 0.875;
+zest2 <- qnorm(alfa2,0,1); print(zest2)
+xest2 <- mu+desvest*zest2; print(xest2)
+
+
+alfa3 <- 0.9;
+zest3 <- qnorm(alfa3,0,1); print(zest3)
+xest3 <- mu+desvest*zest3; print(xest3)
+
+
+alfa4 <- 0.925;
+zest4 <- qnorm(alfa4,0,1); print(zest4)
+xest4 <- mu+desvest*zest4; print(xest4)
+
+
+alfa5 <- 0.95;
+zest5 <- qnorm(alfa5,0,1); print(zest5)
+xest5 <- mu+desvest*zest5; print(xest5)
+
+
+alfa6 <- 0.975;
+zest6 <- qnorm(alfa6,0,1); print(zest6)
+xest6 <- mu+desvest*zest6; print(xest6)
+
+
+alfa7 <- 0.995;
+zest7 <- qnorm(alfa7,0,1); print(zest7)
+xest7 <- mu+desvest*zest7; print(xest7)
+
+
+Resultados <- matrix(0,7,5)
+Resultados[,1] <- c(alfa1, alfa2, alfa3, alfa4, alfa5, alfa6, alfa7); print(Resultados)
+Resultados[,3] <- c(zest1,zest2,zest3,zest4,zest5,zest6,zest7); print(Resultados)
+Resultados[,2] <- -Resultados[,3]
+Resultados[,5] <- c(xest1,xest2,xest3,xest4,xest5,xest6,xest7); print(Resultados)
+Resultados[,4] <- -Resultados[,5]
+colnames(Resultados) <- c('Confianza','*-z*','z*','-x*','x*'); print(Resultados)
+rownames(Resultados) <- c(1,2,3,4,5,6,7); print(Resultados)
+```
+
+```{r}
+
+indices <- c(1,3)
+renglones <- c(5,6,7)
+ValoresZ <- Resultados[renglones,indices]
+print(ValoresZ)
+rownames(ValoresZ) <- c('90%','95%','99%')
+print(ValoresZ)
+```
+
+```{r}
+# Mini rutina para calcular intervalos de confianza para 
+# una media, para muestras grandes
+# Ejercicio 1
+DesvEst <- 8
+n <- 100
+xbarra <- 170
+alpha <- 90; Zalpha1 <- 1.64
+alpha <- 95; Zalpha2 <- 1.96
+alpha <- 99; Zalpha3 <- 2.57
+
+mu1 <- xbarra - Zalpha2*(DesvEst/sqrt(n)); print(mu1)
+mu2 <- xbarra + Zalpha2*(DesvEst/sqrt(n)); print(mu2)
+
+Intervalo <- paste0("mu ∈  ","(",mu1,",",mu2,")"); 
+print(Intervalo)
+```
+
+```{r}
+
+# Ejercicio 2
+
+DesvEst <- 10
+n <- 50
+xbarra <- 400
+alpha <- 90; Zalpha1 <- 1.64
+alpha <- 95; Zalpha2 <- 1.96
+alpha <- 99; Zalpha3 <- 2.57
+
+mu1 <- xbarra - Zalpha1*(DesvEst/sqrt(n)); print(mu1)
+mu2 <- xbarra + Zalpha1*(DesvEst/sqrt(n)); print(mu2)
+
+Intervalo <- paste0("mu ∈  ","(",mu1,",",mu2,")"); 
+print(Intervalo)
+
+
+Intervalo <- paste0("mu ∈  ","(",round(mu1,2),",",round(mu2,2),")"); 
+print(Intervalo)
+
+
+# ejercicio 3
+# Intervalo de confianza del   95
+# para la media de las alturas de una población de   2000
+# estudiantes universitarios:
+#  Media muestral : 170 cm
+# Desviación estándar muestral s: 10 cm
+
+DesvEst <- 10
+n <- 2000
+xbarra <- 170
+alpha <- 90; Zalpha1 <- 1.64
+alpha <- 95; Zalpha2 <- 1.96
+alpha <- 99; Zalpha3 <- 2.57
+
+mu1 <- xbarra - Zalpha2*(DesvEst/sqrt(n)); print(mu1)
+mu2 <- xbarra + Zalpha2*(DesvEst/sqrt(n)); print(mu2)
+
+Intervalo <- paste0("mu ∈  ","(",round(mu1,2),",",round(mu2,2),")"); 
+print(Intervalo)
+# sesion 11 y 12
+#1. X dist. normal con media = 2 y DesvEst = 1/3
+#a) P[X>3]
+#b) P[2<X<3]
+#c) Encontrar x0 tal que P[X>x0]= 0.45
+#d) Encontrar x* tal que P[X<x*]= alfa
+#d') Encontrar x* talque P[|X|<x*]=alfa
+#alfa = 0.5;   alfa = 0.75;  alfa = 0.8;
+#alfa = 0.85;  alfa = 0.9;   alfa = 0.95
+#alfa = 0.99
+#e) P[X<0]
+#f) P[-1<X<1]
+# - - - - - - -  - - - - - - -  - - - - - - - 
+#SOLUCIONES:
+# - - - - - - -  - - - - - - -  - - - - - - - 
+#a) P[X>3]
+# - - - - - - -  - - - - - - -  - - - - - - - 
+x0 <- 3
+mu <- 2;   desvest <- 1/3;
+z0 <- (x0-mu)/desvest; print(z0)
+probabilidad <- pnorm(z0,0,1);  print(probabilidad)
+probbuscada  <- 1-probabilidad; print(probbuscada)
+
+```
+
+```{r}
+#b) P[2<X<3]
+
+
+
+mu <- 2;   desvest <- 1/3;
+x1 <- 2;   
+z1 <- (x1-mu)/desvest; print(z1)
+p1 <- pnorm(z1,0,1);   print(p1)
+x2 <- 3;
+z2 <- (x2-mu)/desvest; print(z2)
+p2 <- pnorm(z2,0,1);   print(p2)
+probbuscada <- p2-p1;  print(probbuscada)
+
+```
+
+```{r}
+#e) P[X<0]
+
+
+x3 <- 0
+mu <- 2;   desvest <- 1/3;
+z3 <- (x3-mu)/desvest; print(z3)
+probabilidad <- pnorm(z3,0,1);  print(probabilidad)
+```
+
+```{r}
+
+#f) P[-1<X<1]
+
+
+
+mu <- 2;   desvest <- 1/3;
+x4 <- -1;   
+z4 <- (x4-mu)/desvest; print(z4)
+p4 <- pnorm(z4,0,1);   print(p4)
+x5 <- 1;
+z5 <- (x5-mu)/desvest; print(z5)
+p5 <- pnorm(z5,0,1);   print(p5)
+probbuscada <- p5-p4;  print(probbuscada)
+
+```
+
+```{r}
+
+#c) Encontrar x0 tal que P[X>x0]= 0.45
+# P[X>x*]= p*, entonces buscamos en tablas el valor x*, tal que 
+# P[X<x*] = q*= 1-p*, esto se hace con la funcion qnorm(q*,0,1)
+pestrella <- 0.45; qestrella = 1-pestrella; print(qestrella)
+zestrella <- qnorm(qestrella,0,1); print(zestrella)
+#corroboramos
+pnorm(zestrella,0,1) # s? es la respuesta correcta!!!!
+mu <- 2;   desvest <- 1/3;
+xestrella <- mu+desvest*zestrella; print(xestrella)
+# corroboramos
+pnorm(xestrella,2,1/3)
+```
+
+```{r}
+
+#d) Encontrar x* tal que P[X<x*]= alfa
+#i)   alfa = 0.5;   ii) alfa = 0.75;  iii) alfa = 0.8;
+#iv)  alfa = 0.85;   v) alfa = 0.9;    vi) alfa = 0.95
+#vii) alfa = 0.99
+mu <- 2;   desvest <- 1/3;
+
+
+
+mu <- 2;   desvest <- 1/3;
+
+
+alfa1 <- 0.5;
+zest1 <- qnorm(alfa1,0,1); print(zest1)
+xest1 <- mu+desvest*zest1; print(xest1)
+
+
+alfa2 <- 0.75;
+zest2 <- qnorm(alfa2,0,1); print(zest2)
+xest2 <- mu+desvest*zest2; print(xest2)
+
+
+alfa3 <- 0.8;
+zest3 <- qnorm(alfa3,0,1); print(zest3)
+xest3 <- mu+desvest*zest3; print(xest3)
+
+alfa4 <- 0.85;
+zest4 <- qnorm(alfa4,0,1); print(zest4)
+xest4 <- mu+desvest*zest4; print(xest4)
+
+
+alfa5 <- 0.9;
+zest5 <- qnorm(alfa5,0,1); print(zest5)
+xest5 <- mu+desvest*zest5; print(xest5)
+
+
+alfa6 <- 0.95;
+zest6 <- qnorm(alfa6,0,1); print(zest6)
+xest6 <- mu+desvest*zest6; print(xest6)
+
+
+alfa7 <- 0.99;
+zest7 <- qnorm(alfa7,0,1); print(zest7)
+xest7 <- mu+desvest*zest7; print(xest7)
+
+
+
+Resultados <- matrix(0,7,3)
+Resultados[,1] <- c(alfa1, alfa2, alfa3, alfa4, alfa5, alfa6, alfa7)
+Resultados[,2] <- c(zest1,zest2,zest3,zest4,zest5,zest6,zest7); print(Resultados)
+Resultados[,3] <- c(xest1,xest2,xest3,xest4,xest5,xest6,xest7); print(Resultados)
+colnames(Resultados) <- c('Confianza','z*','x*'); print(Resultados)
+rownames(Resultados) <- c(1,2,3,4,5,6,7); print(Resultados)
+```
+
+```{r}
+
+mu <- 2;   desvest <- 1/3;
+
+alfa1 <- 0.75;
+zest1 <- qnorm(alfa1,0,1); print(zest1)
+xest1 <- mu+desvest*zest1; print(xest1)
+
+alfa2 <- 0.875;
+zest2 <- qnorm(alfa2,0,1); print(zest2)
+xest2 <- mu+desvest*zest2; print(xest2)
+
+alfa3 <- 0.9;
+zest3 <- qnorm(alfa3,0,1); print(zest3)
+xest3 <- mu+desvest*zest3; print(xest3)
+
+alfa4 <- 0.925;
+zest4 <- qnorm(alfa4,0,1); print(zest4)
+xest4 <- mu+desvest*zest4; print(xest4)
+
+alfa5 <- 0.95;
+zest5 <- qnorm(alfa5,0,1); print(zest5)
+xest5 <- mu+desvest*zest5; print(xest5)
+
+alfa6 <- 0.975;
+zest6 <- qnorm(alfa6,0,1); print(zest6)
+xest6 <- mu+desvest*zest6; print(xest6)
+
+
+alfa7 <- 0.995;
+zest7 <- qnorm(alfa7,0,1); print(zest7)
+xest7 <- mu+desvest*zest7; print(xest7)
+
+
+Resultados <- matrix(0,7,5)
+Resultados[,1] <- c(alfa1, alfa2, alfa3, alfa4, alfa5, alfa6, alfa7); print(Resultados)
+Resultados[,3] <- c(zest1,zest2,zest3,zest4,zest5,zest6,zest7); print(Resultados)
+Resultados[,2] <- -Resultados[,3]
+Resultados[,5] <- c(xest1,xest2,xest3,xest4,xest5,xest6,xest7); print(Resultados)
+Resultados[,4] <- -Resultados[,5]
+colnames(Resultados) <- c('Confianza','*-z*','z*','-x*','x*'); print(Resultados)
+rownames(Resultados) <- c(1,2,3,4,5,6,7); print(Resultados)
+indices <- c(1,3)
+renglones <- c(5,6,7)
+ValoresZ <- Resultados[renglones,indices]
+print(ValoresZ)
+rownames(ValoresZ) <- c('90%','95%','99%')
+print(ValoresZ)
+```
+
+```{r}
+# Mini rutina para calcular intervalos de confianza para 
+# una media, para muestras grandes
+# Ejercicio 1
+DesvEst <- 8
+n <- 100
+xbarra <- 170
+alpha <- 90; Zalpha1 <- 1.64
+alpha <- 95; Zalpha2 <- 1.96
+alpha <- 99; Zalpha3 <- 2.57
+
+mu1 <- xbarra - Zalpha2*(DesvEst/sqrt(n)); print(mu1)
+mu2 <- xbarra + Zalpha2*(DesvEst/sqrt(n)); print(mu2)
+
+Intervalo <- paste0("mu ∈  ","(",mu1,",",mu2,")"); 
+print(Intervalo)
+```
+
+```{r}
+
+# Ejercicio 2
+
+DesvEst <- 10
+n <- 50
+xbarra <- 400
+alpha <- 90; Zalpha1 <- 1.64
+alpha <- 95; Zalpha2 <- 1.96
+alpha <- 99; Zalpha3 <- 2.57
+
+mu1 <- xbarra - Zalpha1*(DesvEst/sqrt(n)); print(mu1)
+mu2 <- xbarra + Zalpha1*(DesvEst/sqrt(n)); print(mu2)
+
+Intervalo <- paste0("mu ∈  ","(",mu1,",",mu2,")"); 
+print(Intervalo)
+
+
+Intervalo <- paste0("mu ∈  ","(",round(mu1,2),",",round(mu2,2),")"); 
+print(Intervalo)
+```
+
+```{r}
+
+# ejercicio 3
+# Intervalo de confianza del   95
+# para la media de las alturas de una población de   2000
+# estudiantes universitarios:
+#  Media muestral : 170 cm
+# Desviación estándar muestral s: 10 cm
+
+DesvEst <- 10
+n <- 2000
+xbarra <- 170
+alpha <- 90; Zalpha1 <- 1.64
+alpha <- 95; Zalpha2 <- 1.96
+alpha <- 99; Zalpha3 <- 2.57
+
+mu1 <- xbarra - Zalpha2*(DesvEst/sqrt(n)); print(mu1)
+mu2 <- xbarra + Zalpha2*(DesvEst/sqrt(n)); print(mu2)
+
+Intervalo <- paste0("mu ∈  ","(",round(mu1,2),",",round(mu2,2),")"); 
+print(Intervalo)
+
+
+```
+
+```{r}
+#tamaño de la muestra (n): 10
+#Media muestral ( xˉ): 170 cm
+#Desviación estándar muestral ( s): 8 cm
+#Nivel de confianza:  95
+n <- 10
+xbarra <- 170
+DesvEst <- 8
+gl <- n-1
+nc <- 0.975
+
+Talpha2 <- round(qt(nc, gl),4)
+mu1 <- xbarra - Talpha2*(DesvEst/sqrt(n)); 
+mu2 <- xbarra + Talpha2*(DesvEst/sqrt(n)); 
+Intervalo <- paste0("mu ∈  ","(",round(mu1,2),",",
+                    round(mu2,2),")"); 
+print(Intervalo)
+
+```
+
+```{r}
+#tamaño de la muestra (n): 10
+#Media muestral ( xˉ): 170 cm
+#Desviación estándar muestral ( s): 8 cm
+#Nivel de confianza:  95
+n <- 15
+xbarra <- 3.5
+DesvEst <- 0.5
+gl <- n-1
+nc <- 0.95
+
+Talpha2 <- round(qt(nc, gl),4)
+mu1 <- xbarra - Talpha2*(DesvEst/sqrt(n)); 
+mu2 <- xbarra + Talpha2*(DesvEst/sqrt(n)); 
+Intervalo <- paste0("mu ∈  ","(",round(mu1,2),",",round(mu2,2),")"); 
+print(Intervalo)
+
+
+```
+
+# Sesion 12
+
+```{r}
+
+
+# Varianzas conocidas e iguales
+DesvEst <- 0.8
+n1 <- 50
+n2 <- 50
+xbarra1 <- 3.5
+xbarra2 <- 4.2
+xbarra <- xbarra1-xbarra2
+alpha <- 90; Zalpha1 <- 1.64
+alpha <- 95; Zalpha2 <- 1.96
+alpha <- 99; Zalpha3 <- 2.57
+
+nc <- Zalpha2
+ErrorStd <- DesvEst*sqrt((n1+n2)/(n1*n2))
+ErrorStd <- DesvEst*sqrt((1/n1)+(1/n2))
+
+LimInf <- xbarra - nc*ErrorStd; print(LimInf)
+LimSup <- xbarra + nc*ErrorStd; print(LimSup)
+
+Intervalo <- paste0("mu ∈  ","(",round(LimInf,2),",",
+                    round(LimSup,2),")"); 
+print(Intervalo)
+```
+
+```{r}
+# Varianzas desconocidas e iguales
+n1 <- 10
+n2 <- 12
+xbarra1 <- 6.5
+xbarra2 <- 5.8
+S1 <- 0.7
+S2 <- 0.9
+xbarra <- xbarra1-xbarra2
+nc <- 0.975
+Sd <- sqrt(((n1-1)*S1^2+(n2-1)*S2^2)/(n1+n2-2))
+gl = n1+n2-2
+Talpha2 <- round(qt(nc, gl),4)
+LimInf <- xbarra - Talpha2*(Sd); 
+LimSup <- xbarra + Talpha2*(Sd); 
+Intervalo <- paste0("mu ∈  ","(",
+                    round(LimInf,2),
+                    ",",
+                    round(LimSup,2),
+                    ")"); 
+print(Intervalo)
+```
+
+```{r}
+# Varianzas desconocidas y distintas
+# Se quiere comparar la efectividad de dos medicamentos para el dolor de cabeza. 
+# Se toma una muestra de 10 pacientes para el medicamento A y otra 
+# muestra de 12 pacientes para el medicamento B. Los resultados muestran que la 
+# media del medicamento A es de 6.5 y la media del medicamento B es de 5.8. 
+# Las desviaciones estándar son de 0.7 para el medicamento A y
+# 0.9 para el medicamento B. 
+#Construya un intervalo de confianza del 95% para la diferencia de medias.
+
+n1 <- 10
+n2 <- 12
+xbarra1 <- 6.5
+xbarra2 <- 5.8
+S1 <- 0.7
+S2 <- 0.9
+xbarra <- xbarra1-xbarra2
+nc <- 0.975
+Sd <- sqrt(((S1^2)/n1)+((S2^2)/n2))
+
+numerador <- (((S1^2)/n1)+((S2^2)/n2))^2
+denominador <- ((((S1^2)/n1)^2)/(n1-1))+((((S2^2)/n2)^2)/(n2-1))
+gl = ceiling(numerador/denominador)
+Talpha2 <- round(qt(nc, gl),4)
+
+LimInf <- xbarra - Talpha2*(Sd); 
+LimSup <- xbarra + Talpha2*(Sd); 
+Intervalo <- paste0("mu ∈  ","(",
+                    round(LimInf,2),
+                    ",",
+                    round(LimSup,2),
+                    ")"); 
+print(Intervalo)
+
+```
+
+```{r}
+
+
+
+
+
+
+
+
+```
+
